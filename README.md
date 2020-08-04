@@ -2,7 +2,7 @@
 
 此`Repository`透過`Server-Sent-Events(SSE)`來實現`Golang Server`主動推送訊息給`Web Client`
 
-## 什麼事SSE
+## 什麼是SSE
 
 特性:
 
