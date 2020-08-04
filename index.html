@@ -1,0 +1,31 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 透過SSE來連線至Golang Server
+      const sse = new EventSource("http://localhost:3000")
+
+      // 連線成功的處理
+      sse.addEventListener("open", _ => {
+        console.log("Successfully connected")
+      })
+
+      // 連線失敗的處理，並且會SSE斷線會自動重連
+      sse.addEventListener("error", event => {
+        console.log("Close the connection\nReason: ", event)
+        console.log("Start automatic reconnection")
+      })
+
+      // 接收event名為`push-message`的訊息
+      sse.addEventListener("push-message", event => {
+        console.log("message:", JSON.parse(event.data))
+      })
+
+      // 10秒後Web Client會自動斷開連線
+      setTimeout(() => {
+        sse.close();
+      }, 10000);
+    </script>
+  </body>
+</html>

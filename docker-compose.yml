@@ -1,0 +1,17 @@
+version: "3.5"
+
+services:
+  server:
+    image: golang:1.14.6-alpine
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+    ports:
+      - 3000:3000
+    entrypoint: go run main.go
+  client:
+    image: httpd:2.4
+    volumes:
+      - ${PWD}:/usr/local/apache2/htdocs/
+    ports:
+      - 5000:80
